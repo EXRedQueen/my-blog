@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vacant.myblog.dao.ArticleInfoMapper">
+  <resultMap id="BaseResultMap" type="com.vacant.myblog.entity.ArticleInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="is_top" jdbcType="BIT" property="is_top" />
+    <result column="traffic" jdbcType="INTEGER" property="traffic" />
+    <result column="create_by" jdbcType="INTEGER" property="create_by" />
+    <result column="modified_by" jdbcType="INTEGER" property="modified_by" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, description, is_top, traffic, create_by, modified_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_article_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_article_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.vacant.myblog.entity.ArticleInfo">
+    insert into blog_article_info (id, title, description, 
+      is_top, traffic, create_by, 
+      modified_by)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{is_top,jdbcType=BIT}, #{traffic,jdbcType=INTEGER}, #{create_by,jdbcType=INTEGER}, 
+      #{modified_by,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vacant.myblog.entity.ArticleInfo">
+    insert into blog_article_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="is_top != null">
+        is_top,
+      </if>
+      <if test="traffic != null">
+        traffic,
+      </if>
+      <if test="create_by != null">
+        create_by,
+      </if>
+      <if test="modified_by != null">
+        modified_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="is_top != null">
+        #{is_top,jdbcType=BIT},
+      </if>
+      <if test="traffic != null">
+        #{traffic,jdbcType=INTEGER},
+      </if>
+      <if test="create_by != null">
+        #{create_by,jdbcType=INTEGER},
+      </if>
+      <if test="modified_by != null">
+        #{modified_by,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vacant.myblog.entity.ArticleInfo">
+    update blog_article_info
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="is_top != null">
+        is_top = #{is_top,jdbcType=BIT},
+      </if>
+      <if test="traffic != null">
+        traffic = #{traffic,jdbcType=INTEGER},
+      </if>
+      <if test="create_by != null">
+        create_by = #{create_by,jdbcType=INTEGER},
+      </if>
+      <if test="modified_by != null">
+        modified_by = #{modified_by,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vacant.myblog.entity.ArticleInfo">
+    update blog_article_info
+    set title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      is_top = #{is_top,jdbcType=BIT},
+      traffic = #{traffic,jdbcType=INTEGER},
+      create_by = #{create_by,jdbcType=INTEGER},
+      modified_by = #{modified_by,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
